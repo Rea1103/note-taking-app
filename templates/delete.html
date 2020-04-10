@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+
+<html>
+  <div class = 'container'>
+    <head>
+      <title>Home</title>
+      <link rel = 'stylesheet' href = 'static/static194.css'/>
+      <meta charset = 'utf-8'/>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- FONTS+ICONS --->
+      <link href="https://fonts.googleapis.com/css?family=Comic+Neue&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Baloo+Paaji+2&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+        rel="stylesheet">
+
+      <h2>{{current_date}} </h2>
+
+      <img src='static/dhslogo.png'>
+
+      <script>
+      function startTime() {
+      var today = new Date();
+      var h = today.getHours();
+      var m = today.getMinutes();
+      var s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('txt').innerHTML =
+      h + ":" + m + ":" + s;
+      var t = setTimeout(startTime, 500);
+      }
+      function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+      }
+      </script>
+
+      <div class = 'clock'>
+        <body onload="startTime()">
+        <div id = 'txt'></div>
+      </div>
+
+    </head>
+
+    <body>
+      <ul>
+      <li><a href = '/'><i class = 'material-icons'>dashboard</i></a></li>
+
+      <li><a href = 'createnote'><i class = 'material-icons'>add</i></a></li>
+
+      <!-- proper href = 'editnote' -->
+      <li><a href = 'yeet'><i class = 'material-icons'>create</i></a>
+
+      <!-- proper href = 'schedule' -->
+      <li><a href = 'yeet'><i class = 'material-icons'>schedule</i></a></li>
+
+      <!-- proper href = 'event' -->
+      <li><a href = 'yeet'><i class = 'material-icons'>event</i></a></li> 
+
+      <!-- proper href = 'delete' -->
+      <li><a href = 'delete'><i class = 'material-icons'>delete</i></a><li> 
+        
+      <!-- proper href = 'menu' -->
+      <li><a href = 'yeet'><i class = 'material-icons'>menu</i></a></li>
+      </ul> 
+
+      <form method = 'POST' class = 'create'>
+      <!-- white background --->
+        <div class = 'rectangle'>
+          <p id = 'pin'>What do you want to delete: </p>
+
+          <div class = 'form-title'>
+          <input type = 'text' name = 'title' autocomplete = 'off' placeholder = 'Title' maxlength = '16'required/>
+          </div>
+          <input type = 'submit' name = 'delete' value = 'Delete'>
+        </div> 
+      </form>
+
+    </body>
+  </div>
+</html>
