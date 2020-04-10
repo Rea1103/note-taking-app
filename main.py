@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect
 import datetime
 import random
 import glob
+import os
 
 web_app = Flask(__name__)
 current1_date = datetime.date.today()
@@ -13,6 +14,7 @@ def dashboard():
   if request.method == 'GET':
 	  return render_template('index.html', 
     current_date=current_date, today_date=today_date, notes=fetch_notes())
+
 
 #create a random id
 def random_string(length = 16):
@@ -37,7 +39,7 @@ def create():
       else:
         data1 = ''
         data1 += title + '<-.-.-.-.-.-.>' + deadline + '<-.-.-.-.-.-.>' + text
-        with open('notes/{}.note'.format(random_string()), 
+        with open('notes/{}.note'.format(title), 
         'w+') as _file:
           _file.write(data1)
         _file.close()
@@ -60,5 +62,19 @@ def fetch_notes():
 @web_app.route('/yeet')
 def yeet():
   return render_template('undone.html', current_date=current_date)
+
+@web_app.route(('/delete'), methods = ['POST', 'GET'])
+def delete():
+  if request.method == 'POST':
+    if request.form.get('delete'): #if submit/save button is pressed
+      title = request.form.get('title')
+      item = (title + '.note')
+      if os.path.exists(os.path.join('notes', item)):
+        os.remove(os.path.join('notes', item))
+      else:
+        return render_template('delete.html', current_date=current_date)
+    return redirect('/')
+  else:
+    return render_template('delete.html', current_date=current_date)
 
 web_app.run(host='0.0.0.0', port=8080)
